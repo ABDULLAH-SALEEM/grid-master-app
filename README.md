@@ -3,6 +3,9 @@
 Welcome to **Grid Master**, a feature-rich, mobile-responsive React application designed for managing grids and user profiles. This README provides an overview of the app's functionality, architecture, and key modules.
 
 ---
+# Live Demo
+
+For live demo [Click here](https://grid-master-app.vercel.app/).  
 
 ## Features Overview
 
