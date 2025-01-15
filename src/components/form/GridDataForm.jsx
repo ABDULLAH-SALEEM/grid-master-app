@@ -41,6 +41,7 @@ const GridDataForm = ({ data, isEdit }) => {
           <Grid key={index} item xs={12} md={4}>
             <CustomTextField
               label={field}
+              required={false}
               disabled={!isEdit || field === 'id'}
               controller={{
                 name: `rowData.${field}`,
