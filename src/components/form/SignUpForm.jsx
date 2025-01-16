@@ -26,6 +26,7 @@ const SignUpForm = () => {
     setLoading(true);
     try {
       const signUp = await SIGN_UP(data);
+      alert(`In case you dont recieve otp because of unverified app. This is your otp "${signUp.data.otp}".`);
       showSuccessTost(signUp.message);
       navigate('/otp', { state: { email: data.email, verifcationMode: OTP_VERIFICATION_MODE.NEW_USER } });
     } catch (error) {

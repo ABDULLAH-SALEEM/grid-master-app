@@ -26,6 +26,7 @@ const ForgotPassword = () => {
     setLoading(true);
     try {
       const resp = await VERIFY_EMAIL(body);
+      alert(`In case you dont recieve otp because of unverified app. This is your otp "${resp.data.otp}".`);
       showSuccessTost(resp.message);
       navigate('/otp', { state: { email: body.email, verifcationMode: OTP_VERIFICATION_MODE.ACCOUNT_RECOVERY } });
     } catch (error) {
