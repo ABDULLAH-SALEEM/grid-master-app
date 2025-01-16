@@ -10,7 +10,7 @@ const allowedFileTypes = [
   'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
   'text/csv',
 ];
-const maxFileSizeBytes = 512 * 1024 * 1024; // 512 MB
+const maxFileSizeBytes = 10 * 1024 * 1024; // 10 MB
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
