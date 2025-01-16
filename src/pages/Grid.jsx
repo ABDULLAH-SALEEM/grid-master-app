@@ -13,8 +13,7 @@ import LoaderButton from 'src/components/common/loaderButton';
 const DataGrid = () => {
   const navigate = useNavigate();
   const [actions, setActions] = useState([]);
-  const { loading, data, refresh, paginationModel, setPaginationModel } = usePagination(GET_GRIDS);
-  const [rows, setRows] = useState([]);
+  const { loading, data, refresh, loadMore } = usePagination(GET_GRIDS);
   const [showForm, setShowForm] = useState(false);
   const handleGridClick = (id, columns, actions, name) => {
     navigate('/grid-data', { state: { id, columns, actions, name } });
@@ -36,14 +35,6 @@ const DataGrid = () => {
     getActions();
   }, []);
 
-  useEffect(() => {
-    const newRows = [...rows, ...data.rows];
-    setRows(newRows);
-  }, [data]);
-
-  const loadMore = () => {
-    setPaginationModel({ page: paginationModel.page + 1, pageSize: paginationModel.pageSize });
-  };
   return (
     <Grid container spacing={3} sx={{ padding: 2 }}>
       <TabTitle title={'Grids'} />
@@ -58,7 +49,7 @@ const DataGrid = () => {
         </Grid>
       )}
 
-      {rows.map((grid) => (
+      {data.rows.map((grid) => (
         <Grid item xs={12} sm={6} md={4} lg={3} key={grid._id}>
           <Card
             variant="outlined"

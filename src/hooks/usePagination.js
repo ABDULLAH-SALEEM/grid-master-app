@@ -22,7 +22,7 @@ const usePagination = (fetchData, initialParams = {}) => {
       .join('&');
   };
 
-  const getData = async () => {
+  const getData = async (append = false) => {
     setLoading(true);
     try {
       const params = {
@@ -31,21 +31,37 @@ const usePagination = (fetchData, initialParams = {}) => {
         ...querryParams,
       };
       const queryString = getQueryString(params);
-      const { data } = await fetchData(queryString);
-      setData(data);
+      const { data: responseData } = await fetchData(queryString);
+
+      setData((prevData) => {
+        return append
+          ? {
+              rows: [...prevData.rows, ...responseData.rows],
+              rowCount: responseData.rowCount,
+            }
+          : responseData;
+      });
+
       setLoading(false);
     } catch (error) {
       setLoading(false);
       console.error(error);
     }
   };
+
   useEffect(() => {
-    getData();
+    getData(false);
     // eslint-disable-next-line
   }, [paginationModel, fetchData, querryParams]);
 
   const refresh = () => {
-    getData();
+    setPaginationModel({ page: 0, pageSize: paginationModel.pageSize });
+    getData(false);
+  };
+
+  const loadMore = () => {
+    setPaginationModel((prev) => ({ ...prev, page: prev.page + 1 }));
+    getData(true);
   };
 
   return {
@@ -57,6 +73,7 @@ const usePagination = (fetchData, initialParams = {}) => {
     refresh,
     setQuerryParams,
     querryParams,
+    loadMore,
   };
 };
 
