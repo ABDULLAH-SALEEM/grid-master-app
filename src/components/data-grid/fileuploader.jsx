@@ -10,7 +10,7 @@ const allowedFileTypes = [
   'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
   'text/csv',
 ];
-const maxFileSizeBytes = 10 * 1024 * 1024; // 10 MB
+const maxFileSizeBytes = 2 * 1024 * 1024; // 2 MB
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -34,7 +34,7 @@ const FileUploader = ({ file, setFile }) => {
 
       if (allowedFileTypes.includes(selectedFile.type)) {
         if (selectedFile.size > maxFileSizeBytes) {
-          showErrorTost('File size exceeds the limit of 10 MB');
+          showErrorTost('File size exceeds the limit of 2 MB');
           return;
         }
         setFile({ name: selectedFile.name, uploading: true });
