@@ -34,7 +34,7 @@ const FileUploader = ({ file, setFile }) => {
 
       if (allowedFileTypes.includes(selectedFile.type)) {
         if (selectedFile.size > maxFileSizeBytes) {
-          showErrorTost('File size exceeds the limit of 512 MB');
+          showErrorTost('File size exceeds the limit of 10 MB');
           return;
         }
         setFile({ name: selectedFile.name, uploading: true });
